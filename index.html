@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teclado Virtual PT/EN</title>
+<style>
+/* ====== RESET ====== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#f4f4f4;color:#333;display:flex;flex-direction:column;height:100vh;}
+
+/* ====== TOPO ====== */
+header{display:flex;justify-content:space-between;align-items:center;padding:10px;background:#ecb02d;color:white;}
+header button{background:none;border:none;color:white;font-size:18px;cursor:pointer;margin-left:10px;}
+
+/* ====== MENU LATERAL ====== */
+.sidebar{position:fixed;top:0;left:-260px;width:260px;height:100%;background:#fff;border-right:1px solid #ccc;transition:left .3s;overflow-y:auto;z-index:999;padding:15px;}
+.sidebar.active{left:0;}
+.sidebar h3{margin:10px 0;color:#6200ea;}
+.tab{margin-bottom:10px;}
+.tab button{display:block;width:100%;padding:8px;margin:4px 0;border:1px solid #ccc;border-radius:6px;background:#eee;cursor:pointer;}
+
+/* ====== DISPLAY ====== */
+.display{flex:1;display:grid;justify-content:center;align-items:center;font-size:22px;padding:20px;background:#fff;border:2px solid rgb(189,186,186);border-radius:15px;position:relative;margin:20px;word-wrap:break-word;}
+
+/* ====== RODAPÉ / TECLADO ====== */
+footer{padding:10px;background:#e7e6e5;display:flex;flex-direction:column;gap:2px;}
+.keyboard{display:flex;flex-direction:column;gap:2px;}
+.row{display:flex;justify-content:center;gap:2px;}
+.key{flex:1;max-width:50px;padding:12px;text-align:center;border-radius:6px;background:#fff;border:1px solid #ccc;cursor:pointer;font-size:16px;user-select:none;}
+.key.space{flex:2;max-width:150px;background:#f44336;color:white;}
+.key.delete{background:#f44336;color:white;}
+.key.caps{background:#6200ea;color:white;}
+.key.lang{background:#009688;color:white;}
+.key.active{box-shadow:inset 0 0 3px #000;}
+#themeBtn,#voiceBtn{background:#f44336;color:white;padding:10px;border-radius:6px;cursor:pointer;border:none;}
+
+/* ====== RESPONSIVO ====== */
+@media(min-width:768px){
+  .key{max-width:70px;font-size:18px;}
+  .key.space{max-width:200px;}
+}
+
+/* ====== TEMA ESCURO ====== */
+body.dark{background:#121212;color:#eee;}
+body.dark header{background:#ecb02d;color:white;}
+body.dark .display{background:#1e1e1e;border-color:#444;}
+body.dark footer{background:#222;}
+body.dark .key{background:#080808;color:#eee;border:1px solid #080808;}
+body.dark .sidebar{background:#1e1e1e;color:#eee;}
+body.dark .key.space,body.dark .key.delete,body.dark .key.caps,body.dark .key.lang{color:white;}
+
+/* Estilos gerais */
+body { font-family: 'Arial', sans-serif; }
+
+/* Estilo do menu lateral */
+#sidebar { width: 250px; background-color: #2c3e50; color: white; padding: 10px; border-radius: 8px; }
+.menu-item { margin-bottom: 10px; }
+.menu-title { font-size: 18px; font-weight: bold; cursor: pointer; }
+.submenu { margin-top: 5px; display: none; }
+.submenu.open { display: block; }
+.submenu button { background: none; border: none; color: #ecf0f1; padding: 5px 10px; text-align: left; width: 100%; cursor: pointer; }
+.submenu div { margin-top: 5px; }
+.submenu p { background: #34495e; color: white; margin: 3px 0; padding: 6px; border-radius: 4px; cursor: pointer; }
+.submenu p:hover { background: #1abc9c; }
+
+/* Cores específicas */
+.palavra { color: #f39c12; font-weight: bold; }
+.traducao { color: #27ae60; }
+.transcricao { color: #95a5a6; font-style: italic; font-weight: 500; font-size: 14px; }
+.key.lang {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+}
+
+</style>
+</head>
+<body>
+<header>
+  <button id="menuBtn">☰ Menu</button>
+  <h2>Língua Fácil PT/EN</h2>
+</header>
+
+<!-- Menu lateral -->
+<div class="sidebar" id="sidebar"></div>
+
+<!-- Display -->
+<div class="display" id="display"></div>
+
+<!-- Teclado Virtual -->
+<footer>
+  <div class="keyboard">
+    <div class="row numbers">
+      <div class="key">1</div><div class="key">2</div><div class="key">3</div>
+      <div class="key">4</div><div class="key">5</div><div class="key">6</div>
+      <div class="key">7</div><div class="key">8</div><div class="key">9</div>
+      <div class="key">0</div><div class="key delete">⌫</div>
+    </div>
+    <div class="row">
+      <div class="key">Q</div><div class="key">W</div><div class="key">E</div>
+      <div class="key">R</div><div class="key">T</div><div class="key">Y</div>
+      <div class="key">U</div><div class="key">I</div><div class="key">O</div><div class="key">P</div>
+    </div>
+    <div class="row">
+      <div class="key">A</div><div class="key">S</div><div class="key">D</div>
+      <div class="key">F</div><div class="key">G</div><div class="key">H</div>
+      <div class="key">J</div><div class="key">K</div><div class="key">L</div>
+    </div>
+    <div class="row">
+      <div class="key caps">Caps</div>
+      <div class="key">Z</div><div class="key">X</div><div class="key">C</div>
+      <div class="key">V</div><div class="key">B</div><div class="key">N</div>
+      <div class="key">M</div>
+    </div>
+    <div class="row">
+      <div class="key space">Espaço</div>
+      <div class="key lang">PT/EN</div>
+      <button id="themeBtn">🌙</button>
+      <button id="voiceBtn">🎤</button>
+    </div>
+  </div>
+</footer>
+
+<script>
+// JSON de palavras e frases
+const data = {
+  temas: {
+    Família: {
+      Palavras: [
+        { pt: "pai", en: "father", transcricao: "fáder" },
+        { pt: "mãe", en: "mother", transcricao: "mâder" },
+        { pt: "irmão", en: "brother", transcricao: "brâder" }
+      ],
+      Frases: [
+        { pt: "Eu amo minha família", en: "I love my family", transcricao: "ai lâv mai fémili" }
+      ]
+    },
+    Escola: {
+      Palavras: [
+        { pt: "livro", en: "book", transcricao: "buk" },
+        { pt: "professor", en: "teacher", transcricao: "títcher" }
+      ],
+      Frases: [
+        { pt: "Eu estudo inglês", en: "I study English", transcricao: "ai stâdi ínglish" }
+      ]
+    }
+  }
+};
+
+const sidebar = document.getElementById('sidebar');
+const display = document.getElementById('display');
+const menuBtn = document.getElementById('menuBtn');
+const themeBtn = document.getElementById('themeBtn');
+const voiceBtn = document.getElementById('voiceBtn');
+
+let caps = false;
+let lang = 'PT';
+let lastPopulatedFromMenu = false;
+
+// ====== Função para mostrar palavra/frase no display ======
+function mostrarNoDisplay(item){
+  display.innerHTML = `
+    <span class="palavra">${item.pt}</span><br>
+    <span class="traducao">${item.en}</span><br>
+    <span class="transcricao"><i>${item.transcricao}</i></span>
+    <span id="soundBtn" style="
+      position:absolute;
+      bottom:10px;
+      right:10px;
+      cursor:pointer;
+      font-size:24px;
+    ">🔊</span>
+  `;
+
+  const soundBtn = document.getElementById('soundBtn');
+  soundBtn.onclick = () => {
+    const text = lang === 'EN' ? item.en : item.pt;
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = lang === 'EN' ? 'en-US' : 'pt-BR';
+    speechSynthesis.cancel();
+    speechSynthesis.speak(utter);
+  };
+
+  lastPopulatedFromMenu = true;
+}
+
+// ====== Renderizar menu lateral ======
+function renderMenu() {
+  sidebar.innerHTML = '';
+  const closeBtn = document.createElement('button');
+  closeBtn.textContent = "✖ Fechar";
+  closeBtn.style = "width:100%;padding:8px;margin-bottom:10px;background:#f44336;color:white;border:none;border-radius:6px;cursor:pointer;";
+  closeBtn.onclick = () => sidebar.classList.remove('active');
+  sidebar.appendChild(closeBtn);
+
+  for (let tema in data.temas) {
+    const temaDiv = document.createElement('div');
+    temaDiv.className = 'menu-item';
+    const titulo = document.createElement('div');
+    titulo.className = 'menu-title';
+    titulo.textContent = tema;
+
+    const submenu = document.createElement('div');
+    submenu.className = 'submenu';
+    titulo.addEventListener('click', () => { submenu.style.display = submenu.style.display==='block'?'none':'block'; });
+
+    ["Palavras","Frases"].forEach(tipo=>{
+      const btn = document.createElement('button');
+      btn.textContent = tipo;
+      btn.onclick = () => {
+        const content = document.getElementById(`${tema}-${tipo}`);
+        if(content) content.style.display = content.style.display==='block'?'none':'block';
+      };
+      submenu.appendChild(btn);
+
+      const contentDiv = document.createElement('div');
+      contentDiv.id = `${tema}-${tipo}`;
+      contentDiv.style.display='none';
+      contentDiv.style.marginLeft='15px';
+      contentDiv.style.marginTop='5px';
+      data.temas[tema][tipo].forEach(item=>{
+        const p = document.createElement('p');
+        p.textContent = item.pt;
+        p.onclick = ()=>mostrarNoDisplay(item);
+        contentDiv.appendChild(p);
+      });
+      submenu.appendChild(contentDiv);
+    });
+
+    temaDiv.appendChild(titulo);
+    temaDiv.appendChild(submenu);
+    sidebar.appendChild(temaDiv);
+  }
+}
+
+renderMenu();
+
+menuBtn.onclick = ()=>sidebar.classList.toggle('active');
+themeBtn.onclick = ()=>document.body.classList.toggle('dark');
+
+// ====== Teclado virtual ======
+const keys = document.querySelectorAll('.key');
+const ptKeys = [['Q','W','E','R','T','Y','U','I','O','P'],['A','S','D','F','G','H','J','K','L'],['Z','X','C','V','B','N','M']];
+const enKeys = ptKeys;
+
+function updateKeys() {
+  const letterKeys = document.querySelectorAll('.row:not(.numbers) .key:not(.caps):not(.space):not(.lang)');
+  const layout = lang === 'PT' ? ptKeys : enKeys;
+  let r = 0, c = 0;
+  const rows = Array.from(document.querySelectorAll('.row')).filter(r=>!r.classList.contains('numbers'));
+  const rowLengths = rows.map(r=>r.querySelectorAll('.key:not(.caps):not(.space):not(.lang)').length);
+
+  letterKeys.forEach(k=>{
+    if(c>=rowLengths[r]){ r++; c=0; }
+    if(layout[r] && layout[r][c]) k.textContent = caps?layout[r][c].toUpperCase():layout[r][c].toLowerCase();
+    c++;
+  });
+}
+
+updateKeys();
+
+function handleDelete(){
+  if(!display) return;
+  if(lastPopulatedFromMenu){ display.textContent=''; lastPopulatedFromMenu=false; return; }
+  display.textContent = display.textContent.slice(0,-1);
+}
+
+keys.forEach(k=>{
+  k.onclick = ()=>{
+    if(k.classList.contains('delete')) handleDelete();
+    else if(k.classList.contains('space')) display.textContent+=' ';
+    else if(k.classList.contains('caps')){ caps=!caps; k.classList.toggle('active',caps); updateKeys(); }
+    else if(k.classList.contains('lang')){ lang=lang==='PT'?'EN':'PT'; k.textContent=lang; updateKeys(); }
+    else display.textContent += k.textContent;
+    lastPopulatedFromMenu=false;
+  };
+});
+
+document.addEventListener('keydown', e=>{
+  const key=e.key.toUpperCase();
+  const letterKeys=Array.from(document.querySelectorAll('.row:not(.numbers) .key:not(.caps):not(.space):not(.lang)'));
+  const keyButton=letterKeys.find(k=>k.textContent.toUpperCase()===key);
+  if(keyButton) keyButton.click();
+  else if(e.key==='Backspace') document.querySelector('.key.delete').click();
+  else if(e.key===' ') document.querySelector('.key.space').click();
+});
+
+// ====== Funções auxiliares ======
+function simplify(str){
+  return str.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+}
+
+function findItemInData(text){
+  if(!text) return null;
+  const t = simplify(text);
+  for(const temaName in data.temas){
+    const tema = data.temas[temaName];
+    for(const tipo of ['Palavras','Frases']){
+      if(!tema[tipo]) continue;
+      for(const item of tema[tipo]){
+        if(simplify(item.pt)===t || simplify(item.en)===t) return item;
+      }
+    }
+  }
+  return null;
+}
+
+// ====== Reconhecimento de voz ======
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+
+if(SpeechRecognition){
+  const recognizer = new SpeechRecognition();
+  recognizer.interimResults=false;
+  recognizer.maxAlternatives=1;
+  let listening=false;
+
+  voiceBtn.addEventListener('click', ()=>{
+    if(!listening){
+      recognizer.lang = lang==='EN'?'en-US':'pt-BR';
+      recognizer.start();
+      listening=true;
+      voiceBtn.classList.add('listening');
+    } else {
+      recognizer.stop();
+      listening=false;
+      voiceBtn.classList.remove('listening');
+    }
+  });
+
+  recognizer.addEventListener('result', ev=>{
+    const transcript = ev.results[0][0].transcript.trim();
+    display.textContent = transcript;
+    lastPopulatedFromMenu=false;
+
+    const found = findItemInData(transcript);
+    if(found) mostrarNoDisplay(found);
+  });
+
+  recognizer.addEventListener('end', ()=>{ listening=false; voiceBtn.classList.remove('listening'); });
+  recognizer.addEventListener('error', ()=>{ listening=false; voiceBtn.classList.remove('listening'); });
+}
+</script>
+
+
+</body>
+</html>
