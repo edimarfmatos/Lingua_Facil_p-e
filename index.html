@@ -68,11 +68,13 @@ body { font-family: 'Arial', sans-serif; }
 .palavra { color: #f39c12; font-weight: bold; }
 .traducao { color: #27ae60; }
 .transcricao { color: #95a5a6; font-style: italic; font-weight: 500; font-size: 14px; }
+
 .key.lang {
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
 }
+
 
 </style>
 </head>
@@ -271,8 +273,14 @@ keys.forEach(k=>{
     if(k.classList.contains('delete')) handleDelete();
     else if(k.classList.contains('space')) display.textContent+=' ';
     else if(k.classList.contains('caps')){ caps=!caps; k.classList.toggle('active',caps); updateKeys(); }
-    else if(k.classList.contains('lang')){ lang=lang==='PT'?'EN':'PT'; k.textContent=lang; updateKeys(); }
-    else display.textContent += k.textContent;
+else if(k.classList.contains('lang')){
+    lang = (lang==='PT' ? 'EN' : 'PT');
+    display.textContent = '';   // limpa o display ao trocar idioma
+    updateKeys();
+    k.textContent = lang;       // mostra PT ou EN no botão
+    lastPopulatedFromMenu = false; // mantém delete e reset funcionando
+}
+    else display.textContent+=k.textContent;
     lastPopulatedFromMenu=false;
   };
 });
