@@ -10,7 +10,7 @@
 body{font-family:Arial,sans-serif;background:#f4f4f4;color:#333;display:flex;flex-direction:column;height:100vh;}
 
 /* ====== TOPO ====== */
-header{display:flex;justify-content:space-between;align-items:center;padding:10px;background:#ecb02d;color:white;}
+header{display:flex;justify-content:space-between;align-items:center;padding:10px;background: linear-gradient(90deg, #ff8d86, #ffea8b);color:white;}
 header button{background:none;border:none;color:white;font-size:18px;cursor:pointer;margin-left:10px;}
 
 /* ====== MENU LATERAL ====== */
@@ -40,23 +40,44 @@ header button{background:none;border:none;color:white;font-size:18px;cursor:poin
 /* Telas menores que 768px (celular) */
 @media (max-width: 768px) {
   .display {
-    height: 330px; /* reduz 30% aproximadamente */
-    font-size: 30px; /* opcional: reduz o tamanho da fonte também */
-    padding: 25px;   /* mantém proporção visual */
+    height: 230px; /* reduz 30% aproximadamente */
+    font-size: 18px; /* opcional: reduz o tamanho da fonte também */
+    padding: 15px;   /* mantém proporção visual */
   }
 }
+
+.cliente {
+  display: flex;
+  justify-content: center;   /* centraliza horizontalmente */
+  align-items: center;       /* alinha na vertical */
+  gap: 15px;                 /* espaço entre imagem e texto */
+}
+
+.cliente img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;        /* deixa a foto redonda */
+  margin: 0;                 /* removi margin manual */
+}
+
+.cliente h1 {
+  font-size: 22px;           /* tamanho do texto */
+  margin: 0;                 /* remove margem padrão */
+  color: white;              /* mantém harmonia com seu header */
+}
+
 
 /* ====== RODAPÉ / TECLADO ====== */
 footer{padding:10px;background:#e7e6e5;display:flex;flex-direction:column;gap:2px;}
 .keyboard{display:flex;flex-direction:column;gap:2px;}
 .row{display:flex;justify-content:center;gap:2px;}
 .key{flex:1;max-width:50px;padding:12px;text-align:center;border-radius:6px;background:#fff;border:1px solid #ccc;cursor:pointer;font-size:16px;user-select:none;}
-.key.space{flex:2;max-width:150px;background:#f44336;color:white;}
-.key.delete{background:#f44336;color:white;}
-.key.caps{background:#6200ea;color:white;}
-.key.lang{background:#009688;color:white;}
+.key.space{flex:2;max-width:150px;background:#ff8d86;color:white;}
+.key.delete{background:#ff8d86;color:white;}
+.key.caps{background:#ff8d86;color:white;display: flex;justify-content: center;}
+.key.lang{background:#ff8d86;color:white;display: flex;justify-content: center;}
 .key.active{box-shadow:inset 0 0 3px #000;}
-#themeBtn,#voiceBtn{background:#f44336;color:white;padding:10px;border-radius:6px;cursor:pointer;border:none;}
+#themeBtn,#voiceBtn{background:#ff8d86;color:white;padding:10px;border-radius:6px;cursor:pointer;border:none;}
 
 /* ====== RESPONSIVO ====== */
 @media(min-width:768px){
@@ -66,12 +87,17 @@ footer{padding:10px;background:#e7e6e5;display:flex;flex-direction:column;gap:2p
 
 /* ====== TEMA ESCURO ====== */
 body.dark{background:#121212;color:#eee;}
-body.dark header{background:#ecb02d;color:white;}
+body.dark header{background: linear-gradient(90deg, #ff8d86, #ffea8b);color:white;}
 body.dark .display{background:#1e1e1e;border-color:#444;}
 body.dark footer{background:#222;}
 body.dark .key{background:#080808;color:#eee;border:1px solid #080808;}
 body.dark .sidebar{background:#1e1e1e;color:#eee;}
-body.dark .key.space,body.dark .key.delete,body.dark .key.caps,body.dark .key.lang{color:white;}
+body.dark .key.space,body.dark .key.delete,body.dark .key.caps{
+  background: #ff8d86;
+  color:white;}
+body.dark .key.lang{background: #ff8d86;}
+body.dark .key.caps.active{box-shadow:inset 0 0 5px #fff;}
+body.dark #themeBtn, body.dark #voiceBtn{background:#ff8d86;color:white;}
 
 /* Estilos gerais */
 body { font-family: 'Arial', sans-serif; }
@@ -102,6 +128,37 @@ body { font-family: 'Arial', sans-serif; }
 </style>
 </head>
 <body>
+<div class="cliente">
+  <img src="https://i.imgur.com/G5W2IrH.png" alt="Minha Foto">
+  <h1>Edimar Ferreira</h1>
+</div>
+
+<style>
+.cliente {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  background: linear-gradient(90deg, #ff8d86, #ffea8b); /* só pra ver melhor */
+  padding: 10px;
+}
+
+.cliente img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid black; /* força borda pra aparecer */
+}
+
+.cliente h1 {
+  font-size: 22px;
+  margin: 0;
+  color: white;
+}
+</style>
+
+
+
 <header>
   <button id="menuBtn">☰ Menu</button>
   <h2>Língua Fácil PT/EN</h2>
@@ -111,7 +168,7 @@ body { font-family: 'Arial', sans-serif; }
 <div class="sidebar" id="sidebar"></div>
 
 <!-- Display -->
-<div class="display" id="display"></div>
+<div class="display" id="display" style="margin: 30px;"></div>
 
 <!-- Teclado Virtual -->
 <footer>
@@ -138,9 +195,9 @@ body { font-family: 'Arial', sans-serif; }
       <div class="key">V</div><div class="key">B</div><div class="key">N</div>
       <div class="key">M</div>
     </div>
-    <div class="row">
+    <div class="row">      
       <div class="key space">Espaço</div>
-      <div class="key lang">PT/EN</div>
+      <div class="key lang" style="font-size: 12px;">PT/EN</div>
       <button id="themeBtn">🌙</button>
       <button id="voiceBtn">🎤</button>
     </div>
@@ -376,11 +433,3 @@ if(SpeechRecognition){
 
 </body>
 </html>
-
-
-
-
-
-
-
-
