@@ -22,8 +22,8 @@ header button{background:none;border:none;color:white;font-size:18px;cursor:poin
 
 /* ====== DISPLAY ====== */
 .display {
-  flex: none;          /* não deixa ele crescer infinito */
-  height: 250px;       /* ajuste fixo */
+  flex: none;
+  height: 250px; /* ou o tamanho que você preferir */
   display: grid;
   justify-content: center;
   align-items: center;
@@ -33,18 +33,19 @@ header button{background:none;border:none;color:white;font-size:18px;cursor:poin
   border: 2px solid rgb(189,186,186);
   border-radius: 15px;
   position: relative;
-  margin: 20px;
+  margin: 40px 20px; /* ajuste a margem aqui */
   word-wrap: break-word;
 }
 
-/* Telas menores que 768px (celular) */
 @media (max-width: 768px) {
   .display {
-    height: 230px; /* reduz 30% aproximadamente */
-    font-size: 18px; /* opcional: reduz o tamanho da fonte também */
-    padding: 15px;   /* mantém proporção visual */
+    height: 230px;
+    font-size: 18px;
+    padding: 15px;
+    margin: 50px 20px; /* ajuste maior para dispositivos móveis */
   }
 }
+
 
 .cliente {
   display: flex;
@@ -362,8 +363,13 @@ else if(k.classList.contains('lang')){
 }
     else display.textContent+=k.textContent;
     lastPopulatedFromMenu=false;
+
+    //checa se palavra ou frase existe na biblioteca
+    const found = findItemInData(display.textContent);
+    if(found) mostrarNoDisplay(found);
   };
 });
+
 
 document.addEventListener('keydown', e=>{
   const key=e.key.toUpperCase();
@@ -373,6 +379,19 @@ document.addEventListener('keydown', e=>{
   else if(e.key==='Backspace') document.querySelector('.key.delete').click();
   else if(e.key===' ') document.querySelector('.key.space').click();
 });
+
+// ====== Verifica se o texto digitado está na biblioteca ======
+display.addEventListener('input', ()=>{
+  const found = findItemInData(display.textContent);
+  if(found) mostrarNoDisplay(found);
+});
+
+// Também verifica sempre que soltar uma tecla
+document.addEventListener('keyup', ()=>{
+  const found = findItemInData(display.textContent);
+  if(found) mostrarNoDisplay(found);
+});
+
 
 // ====== Funções auxiliares ======
 function simplify(str){
