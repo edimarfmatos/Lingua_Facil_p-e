@@ -227,116 +227,67 @@ body { font-family: 'Arial', sans-serif; }
 <script>
 // JSON de palavras e frases
 const data = {
-  temas: {
-    "apresentacoes": {
-  "Palavras": [
-    { "pt": "olá", "en": "hello", "transcricao": "hélou" },
-    { "pt": "bom dia", "en": "good morning", "transcricao": "gúd mórning" },
-    { "pt": "boa tarde", "en": "good afternoon", "transcricao": "gúd áfternún" },
-    { "pt": "boa noite", "en": "good night", "transcricao": "gúd náit" },
-    { "pt": "como vai?", "en": "how are you?", "transcricao": "ráu ár iu?" },
-    { "pt": "com licença", "en": "excuse me", "transcricao": "ékskiús mí" }
-  ],
-  "Frases": [
-    { "pt": "olá, como vai?", "en": "hello, how are you?", "transcricao": "hélou, ráu ár iu?" },
-    { "pt": "bom dia, senhor", "en": "good morning, sir", "transcricao": "gúd mórning, sér" },
-    { "pt": "boa tarde a todos", "en": "good afternoon everyone", "transcricao": "gúd áfternún évríwán" },
-    { "pt": "boa noite, até amanhã", "en": "good night, see you tomorrow", "transcricao": "gúd náit, sí iu tumórou" },
-    { "pt": "com licença, posso entrar?", "en": "excuse me, may I come in?", "transcricao": "ékskiús mí, mêi ái kám in?" }
+   temas: {
+     "Vocabulário Básico": {
+    "Palavras": [
+      { "pt": "olá", "en": "hello", "transcricao": "hélou" },
+      { "pt": "bom dia", "en": "good morning", "transcricao": "gúd mórning" },
+      { "pt": "boa tarde", "en": "good afternoon", "transcricao": "gúd áfternún" },
+      { "pt": "boa noite", "en": "good night", "transcricao": "gúd náit" },
+      { "pt": "como vai?", "en": "how are you?", "transcricao": "ráu ár iu?" },
+      { "pt": "com licença", "en": "excuse me", "transcricao": "ékskiús mí" },
+      { "pt": "sim", "en": "yes", "transcricao": "iés" },
+      { "pt": "não", "en": "no", "transcricao": "nôu" },
+      { "pt": "por favor", "en": "please", "transcricao": "plíiz" },
+      { "pt": "obrigado", "en": "thank you", "transcricao": "thénk iú" },
+      { "pt": "de nada", "en": "you’re welcome", "transcricao": "iúr uélcam" },
+      { "pt": "desculpa", "en": "sorry", "transcricao": "sóri" },
+      { "pt": "água", "en": "water", "transcricao": "uóter" },
+      { "pt": "pão", "en": "bread", "transcricao": "bréd" },
+      { "pt": "escola", "en": "school", "transcricao": "skúl" }
+    ],
+    "Frases": [
+      { "pt": "olá, como vai?", "en": "hello, how are you?", "transcricao": "hélou, ráu ár iu?" },
+      { "pt": "bom dia, senhor", "en": "good morning, sir", "transcricao": "gúd mórning, sér" },
+      { "pt": "boa tarde a todos", "en": "good afternoon everyone", "transcricao": "gúd áfternún évríwán" },
+      { "pt": "boa noite, até amanhã", "en": "good night, see you tomorrow", "transcricao": "gúd náit, sí iu tumórou" },
+      { "pt": "com licença, posso entrar?", "en": "excuse me, may I come in?", "transcricao": "ékskiús mí, mêi ái kám in?" },
+      { "pt": "sim, tudo bem?", "en": "yes, all good?", "transcricao": "iés, ól gud?" },
+      { "pt": "não, obrigado", "en": "no, thank you", "transcricao": "nôu, thénk iú" },
+      { "pt": "por favor, me ajude", "en": "please, help me", "transcricao": "plíiz, hélp mí" },
+      { "pt": "desculpa, não entendi", "en": "sorry, I didn’t understand", "transcricao": "sóri, ái didn’t ánderstánd" },
+      { "pt": "com licença, onde fica o banheiro?", "en": "excuse me, where is the bathroom?", "transcricao": "ékskiús mí, uér iz dhã bátum?" }
     ]
   },
-
-    "familia": {
-      "Palavras": [
-        { "pt": "pai", "en": "father", "transcricao": "fáder" },
-        { "pt": "mãe", "en": "mother", "transcricao": "mâder" },
-        { "pt": "irmão", "en": "brother", "transcricao": "brâder" },
-        { "pt": "irmã", "en": "sister", "transcricao": "síster" },
-        { "pt": "avô", "en": "grandfather", "transcricao": "gréndfáder" },
-        { "pt": "avó", "en": "grandmother", "transcricao": "gréndmâder" },
-        { "pt": "filho", "en": "son", "transcricao": "sân" },
-        { "pt": "filha", "en": "daughter", "transcricao": "dóter" },
-        { "pt": "tio", "en": "uncle", "transcricao": "âncâl" },
-        { "pt": "tia", "en": "aunt", "transcricao": "ânt" }
-      ],
-      "Frases": [
-        { "pt": "meu pai é trabalhador", "en": "my father is hardworking", "transcricao": "mái fáder ís hárd-uórking" },
-        { "pt": "minha mãe cozinha bem", "en": "my mother cooks well", "transcricao": "mái mâder cúks uél" },
-        { "pt": "meu irmão estuda inglês", "en": "my brother studies English", "transcricao": "mái brâder stâdíz ínglish" },
-        { "pt": "minha irmã gosta de música", "en": "my sister likes music", "transcricao": "mái síster láiks míusic" },
-        { "pt": "meu avô mora em Nova York", "en": "my grandfather lives in New York", "transcricao": "mái gréndfáder lívs ín nú iórk" },
-        { "pt": "minha avó faz pão", "en": "my grandmother bakes bread", "transcricao": "mái gréndmâder béiks bréd" },
-        { "pt": "meu filho estuda coreano", "en": "my son studies Korean", "transcricao": "mái sân stâdíz córíán" },
-        { "pt": "minha filha canta bem", "en": "my daughter sings well", "transcricao": "mái dóter síngs uél" },
-        { "pt": "meu tio é médico", "en": "my uncle is a doctor", "transcricao": "mái âncâl ís á dóctor" },
-        { "pt": "minha tia trabalha no hospital", "en": "my aunt works at the hospital", "transcricao": "mái ânt uórks át dâ hóspítâl" }
-      ]
-    },
-    "escola": {
-  "Palavras": [
-    { "pt": "professor", "en": "teacher", "transcricao": "títcher" },
-    { "pt": "aluno", "en": "student", "transcricao": "stúdent" },
-    { "pt": "livro", "en": "book", "transcricao": "buk" },
-    { "pt": "caderno", "en": "notebook", "transcricao": "nóutbuk" },
-    { "pt": "quadro", "en": "blackboard", "transcricao": "blékbord" }
-  ],
-  "Frases": [
-    { "pt": "o professor explica a lição", "en": "the teacher explains the lesson", "transcricao": "dâ títcher ékspléins dâ lésn" },
-    { "pt": "o aluno estuda na escola", "en": "the student studies at school", "transcricao": "dâ stúdent stâdíz át skúl" },
-    { "pt": "eu leio um livro", "en": "I read a book", "transcricao": "ái ríd á buk" },
-    { "pt": "escrevo no caderno", "en": "I write in the notebook", "transcricao": "ái ráit ín dâ nóutbuk" },
-    { "pt": "o quadro está limpo", "en": "the blackboard is clean", "transcricao": "dâ blékbord ís clín" }
-    ]
-  },
-
-  "comida": {
-  "Palavras": [
-    { "pt": "maçã", "en": "apple", "transcricao": "ápl" },
-    { "pt": "pão", "en": "bread", "transcricao": "bréd" },
-    { "pt": "leite", "en": "milk", "transcricao": "mâlk" },
-    { "pt": "arroz", "en": "rice", "transcricao": "ráis" },
-    { "pt": "frango", "en": "chicken", "transcricao": "tchíken" }
-  ],
-  "Frases": [
-    { "pt": "eu como maçã", "en": "I eat an apple", "transcricao": "ái ít án ápl" },
-    { "pt": "o pão está fresco", "en": "the bread is fresh", "transcricao": "dâ bréd ís frésh" },
-    { "pt": "bebo leite todos os dias", "en": "I drink milk every day", "transcricao": "ái drínk mâlk évri dêi" },
-    { "pt": "arroz é meu prato favorito", "en": "rice is my favorite dish", "transcricao": "ráis ís mái féivorít dísh" },
-    { "pt": "o frango está assado", "en": "the chicken is roasted", "transcricao": "dâ tchíken ís rôustid" }
-    ]
-  },
-
-  "transporte": {
-  "Palavras": [
-    { "pt": "carro", "en": "car", "transcricao": "cár" },
-    { "pt": "ônibus", "en": "bus", "transcricao": "bâs" },
-    { "pt": "trem", "en": "train", "transcricao": "trén" },
-    { "pt": "avião", "en": "plane", "transcricao": "pléin" },
-    { "pt": "bicicleta", "en": "bicycle", "transcricao": "báisikl" }
-  ],
-  "Frases": [
-    { "pt": "vou de carro para o trabalho", "en": "I go by car to work", "transcricao": "ái góu bái cár tú uórk" },
-    { "pt": "o ônibus está lotado", "en": "the bus is crowded", "transcricao": "dâ bâs ís cláudid" },
-    { "pt": "peguei o trem cedo", "en": "I took the train early", "transcricao": "ái túk dâ trén êrlí" },
-    { "pt": "viajo de avião", "en": "I travel by plane", "transcricao": "ái tréval bái pléin" },
-    { "pt": "uso bicicleta para me exercitar", "en": "I use a bicycle to exercise", "transcricao": "ái iúz á báisikl tú éksârsaíz" }
-    ]
-  },
-  
-   "despedidas": {
-  "Palavras": [
-    { "pt": "tchau", "en": "bye", "transcricao": "bái" },
-    { "pt": "até logo", "en": "see you later", "transcricao": "sí iu léiter" },
-    { "pt": "até amanhã", "en": "see you tomorrow", "transcricao": "sí iu tumórou" },
-    { "pt": "boa noite", "en": "good night", "transcricao": "gúd náit" },
-    { "pt": "adeus", "en": "farewell", "transcricao": "féruél" }
-  ],
-  "Frases": [
-    { "pt": "tchau, nos vemos amanhã", "en": "bye, see you tomorrow", "transcricao": "bái, sí iu tumórou" },
-    { "pt": "até logo, cuide-se", "en": "see you later, take care", "transcricao": "sí iu léiter, téik kér" },
-    { "pt": "boa noite, durma bem", "en": "good night, sleep well", "transcricao": "gúd náit, slíip uél" },
-    { "pt": "adeus, até breve", "en": "farewell, see you soon", "transcricao": "féruél, sí iu sún" },
-    { "pt": "nos vemos depois", "en": "see you later", "transcricao": "sí iu léiter" }
+  "Vocabulário Básico 2": {
+    "Palavras": [
+      { "pt": "pão", "en": "bread", "transcricao": "bréd" },
+      { "pt": "escola", "en": "school", "transcricao": "skúl" },
+      { "pt": "professor", "en": "teacher", "transcricao": "títcher" },
+      { "pt": "aluno", "en": "student", "transcricao": "stúdent" },
+      { "pt": "casa", "en": "house", "transcricao": "ráus" },
+      { "pt": "água", "en": "water", "transcricao": "uóter" },
+      { "pt": "pai", "en": "father", "transcricao": "fáder" },
+      { "pt": "mãe", "en": "mother", "transcricao": "móder" },
+      { "pt": "irmão", "en": "brother", "transcricao": "bróder" },
+      { "pt": "cachorro", "en": "dog", "transcricao": "dóg" },
+      { "pt": "livro", "en": "book", "transcricao": "buk" },
+      { "pt": "mesa", "en": "table", "transcricao": "têibol" },
+      { "pt": "amigo", "en": "friend", "transcricao": "frénd" },
+      { "pt": "avião", "en": "airplane", "transcricao": "érplein" },
+      { "pt": "carro", "en": "car", "transcricao": "cár" }
+    ],
+    "Frases": [
+      { "pt": "esse é meu irmão", "en": "this is my brother", "transcricao": "dhis iz mai bróder" },
+      { "pt": "minha casa é grande", "en": "my house is big", "transcricao": "mai ráus iz big" },
+      { "pt": "o cachorro é pequeno", "en": "the dog is small", "transcricao": "dhã dóg iz smól" },
+      { "pt": "eu tenho um livro", "en": "I have a book", "transcricao": "ai rév a buk" },
+      { "pt": "a mesa é nova", "en": "the table is new", "transcricao": "dhã têibol iz niú" },
+      { "pt": "meu amigo está aqui", "en": "my friend is here", "transcricao": "mai frénd iz ríer" },
+      { "pt": "o avião é grande", "en": "the airplane is big", "transcricao": "dhã érplein iz big" },
+      { "pt": "o carro é azul", "en": "the car is blue", "transcricao": "dhã cár iz blu" },
+      { "pt": "a escola é perto", "en": "the school is near", "transcricao": "dhã skúl iz níer" },
+      { "pt": "o professor é bom", "en": "the teacher is good", "transcricao": "dhã títcher iz gud" }
     ]
   }
 
@@ -565,6 +516,7 @@ if(SpeechRecognition){
 
 </body>
 </html>
+
 
 
 
