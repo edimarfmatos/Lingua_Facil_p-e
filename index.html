@@ -156,6 +156,21 @@ body { font-family: 'Arial', sans-serif; }
   margin: 0;
   color: white;
 }
+
+  /* Feedback visual do microfone ativo */
+#voiceBtn.listening {
+  background: red !important;
+  color: white !important;
+  animation: pulse 1s infinite;
+}
+
+/* Animação de pulsar suave */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,0,0,0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(255,0,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,0,0,0); }
+}
+
 </style>
 
 
@@ -550,6 +565,7 @@ if(SpeechRecognition){
 
 </body>
 </html>
+
 
 
 
