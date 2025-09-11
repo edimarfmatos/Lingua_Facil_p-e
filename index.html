@@ -459,7 +459,12 @@ document.addEventListener('keyup', ()=>{
 
 // ====== Funções auxiliares ======
 function simplify(str){
-  return str.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+  return str.toString()
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g,'')
+            .replace(/[.,!?]/g,'')   // remove vírgulas, pontos, exclamações, interrogações
+            .trim();
 }
 
 function findItemInData(text){
@@ -516,6 +521,7 @@ if(SpeechRecognition){
 
 </body>
 </html>
+
 
 
 
