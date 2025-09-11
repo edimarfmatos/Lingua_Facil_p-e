@@ -247,16 +247,16 @@ const data = {
       { "pt": "escola", "en": "school", "transcricao": "skúl" }
     ],
     "Frases": [
-      { "pt": "olá como vai?", "en": "hello how are you?", "transcricao": "hélou, ráu ár iu?" },
-      { "pt": "bom dia senhor", "en": "good morning sir", "transcricao": "gúd mórning, sér" },
+      { "pt": "olá, como vai?", "en": "hello, how are you?", "transcricao": "hélou, ráu ár iu?" },
+      { "pt": "bom dia, senhor", "en": "good morning, sir", "transcricao": "gúd mórning, sér" },
       { "pt": "boa tarde a todos", "en": "good afternoon everyone", "transcricao": "gúd áfternún évríwán" },
-      { "pt": "boa noite até amanhã", "en": "good night see you tomorrow", "transcricao": "gúd náit, sí iu tumórou" },
-      { "pt": "com licença posso entrar?", "en": "excuse me may I come in?", "transcricao": "ékskiús mí, mêi ái kám in?" },
-      { "pt": "sim tudo bem?", "en": "yes all good?", "transcricao": "iés, ól gud?" },
-      { "pt": "não obrigado", "en": "no thank you", "transcricao": "nôu, thénk iú" },
-      { "pt": "por favor me ajude", "en": "please help me", "transcricao": "plíiz, hélp mí" },
-      { "pt": "desculpa não entendi", "en": "sorry I didn’t understand", "transcricao": "sóri, ái didn’t ánderstánd" },
-      { "pt": "com licença onde fica o banheiro?", "en": "excuse me where is the bathroom?", "transcricao": "ékskiús mí, uér iz dhã bátum?" }
+      { "pt": "boa noite, até amanhã", "en": "good night, see you tomorrow", "transcricao": "gúd náit, sí iu tumórou" },
+      { "pt": "com licença, posso entrar?", "en": "excuse me, may I come in?", "transcricao": "ékskiús mí, mêi ái kám in?" },
+      { "pt": "sim, tudo bem?", "en": "yes, all good?", "transcricao": "iés, ól gud?" },
+      { "pt": "não, obrigado", "en": "no, thank you", "transcricao": "nôu, thénk iú" },
+      { "pt": "por favor, me ajude", "en": "please, help me", "transcricao": "plíiz, hélp mí" },
+      { "pt": "desculpa, não entendi", "en": "sorry, I didn’t understand", "transcricao": "sóri, ái didn’t ánderstánd" },
+      { "pt": "com licença, onde fica o banheiro?", "en": "excuse me, where is the bathroom?", "transcricao": "ékskiús mí, uér iz dhã bátum?" }
     ]
   },
   "Vocabulário Básico 2": {
@@ -458,8 +458,16 @@ document.addEventListener('keyup', ()=>{
 
 
 // ====== Funções auxiliares ======
-function simplify(str){
-  return str.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+//function simplify(str){
+//  return str.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+//}
+  function simplify(str){
+  return str.toString()
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g,'')
+            .replace(/[.,!?]/g,'')   // remove vírgulas, pontos, exclamações, interrogações
+            .trim();
 }
 
 function findItemInData(text){
