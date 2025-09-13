@@ -413,36 +413,54 @@ function handleDelete(){
   display.textContent = display.textContent.slice(0,-1);
 }
 
-keys.forEach(k=>{
-  k.onclick = ()=>{
-    if(k.classList.contains('delete')) handleDelete();
-    else if(k.classList.contains('space')) display.textContent+=' ';
-    else if(k.classList.contains('caps')){ caps=!caps; k.classList.toggle('active',caps); updateKeys(); }
-else if(k.classList.contains('lang')){
-    lang = (lang==='PT' ? 'EN' : 'PT');
-    display.textContent = '';   // limpa o display ao trocar idioma
-    updateKeys();
-    k.textContent = lang;       // mostra PT ou EN no botão
-    lastPopulatedFromMenu = false; // mantém delete e reset funcionando
-}
-    else display.textContent+=k.textContent;
-    lastPopulatedFromMenu=false;
+// ====== Função para lidar com teclado e evitar mistura de palavras ======
+keys.forEach(k => {
+  k.onclick = () => {
+    // Se display foi populado de menu, limpa antes de digitar
+    if (lastPopulatedFromMenu) {
+      display.textContent = '';
+      lastPopulatedFromMenu = false;
+    }
 
-    //checa se palavra ou frase existe na biblioteca
+    if (k.classList.contains('delete')) handleDelete();
+    else if (k.classList.contains('space')) display.textContent += ' ';
+    else if (k.classList.contains('caps')) { 
+      caps = !caps; 
+      k.classList.toggle('active', caps); 
+      updateKeys(); 
+    }
+    else if (k.classList.contains('lang')) {
+      lang = (lang === 'PT' ? 'EN' : 'PT');
+      display.textContent = '';   // limpa display ao trocar idioma
+      updateKeys();
+      k.textContent = lang;
+      lastPopulatedFromMenu = false;
+    }
+    else display.textContent += k.textContent;
+
+    // Verifica se a palavra ou frase já existe
     const found = findItemInData(display.textContent);
-    if(found) mostrarNoDisplay(found);
+    if (found) mostrarNoDisplay(found);
   };
 });
 
+// ====== Ajuste do comportamento ao digitar no teclado físico ======
+document.addEventListener('keydown', e => {
+  // Se display foi populado de menu, limpa antes de digitar
+  if (lastPopulatedFromMenu) {
+    display.textContent = '';
+    lastPopulatedFromMenu = false;
+  }
 
-document.addEventListener('keydown', e=>{
-  const key=e.key.toUpperCase();
-  const letterKeys=Array.from(document.querySelectorAll('.row:not(.numbers) .key:not(.caps):not(.space):not(.lang)'));
-  const keyButton=letterKeys.find(k=>k.textContent.toUpperCase()===key);
-  if(keyButton) keyButton.click();
-  else if(e.key==='Backspace') document.querySelector('.key.delete').click();
-  else if(e.key===' ') document.querySelector('.key.space').click();
+  const key = e.key.toUpperCase();
+  const letterKeys = Array.from(document.querySelectorAll('.row:not(.numbers) .key:not(.caps):not(.space):not(.lang)'));
+  const keyButton = letterKeys.find(k => k.textContent.toUpperCase() === key);
+
+  if (keyButton) keyButton.click();
+  else if (e.key === 'Backspace') document.querySelector('.key.delete').click();
+  else if (e.key === ' ') document.querySelector('.key.space').click();
 });
+
 
 // ====== Verifica se o texto digitado está na biblioteca ======
 display.addEventListener('input', ()=>{
@@ -524,7 +542,6 @@ if(SpeechRecognition){
 
 </body>
 </html>
-
 
 
 
